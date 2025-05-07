@@ -1,7 +1,7 @@
-# OpenSearch Deployment Guide (Helm)
+# OpenSearch Cluster Guide (Helm)
 This guide explains how to install OpenSearch using Helm.
 
-- [OpenSearch Deployment Guide (Helm)](#opensearch-deployment-guide-helm)
+- [OpenSearch Cluster Guide (Helm)](#opensearch-cluster-guide-helm)
   - [Prerequisites](#prerequisites)
   - [Step-by-Step Deployment](#step-by-step-deployment)
     - [1. Add the OpenSearch Helm repo](#1-add-the-opensearch-helm-repo)
