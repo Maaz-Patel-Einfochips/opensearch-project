@@ -1,0 +1,43 @@
+clusterName: "opensearch-cluster"
+nodeGroup: "master"
+
+singleNode: false
+masterService: "opensearch-cluster-master"
+
+roles:
+  - master
+  - ingest
+  - data
+  - remote_cluster_client
+
+replicas: 3
+
+config:
+  opensearch.yml: |
+    cluster.name: opensearch-cluster
+    plugins.ml_commons.allow_registering_model_via_url: true
+    network.host: 0.0.0.0
+
+extraEnvs:
+  - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
+    value: "<custom-admin-password>" #Set a strong password, example:"Xy@9fG#pEid"
+
+resources:
+  requests:
+    cpu: "1000m"
+    memory: "100Mi"
+
+networkHost: "0.0.0.0"
+
+rbac:
+  create: false
+  automountServiceAccountToken: false
+
+persistence:
+  enabled: true
+  enableInitChown: true
+  accessModes:
+    - ReadWriteOnce
+  size: 8Gi
+
+antiAffinity: "soft"
