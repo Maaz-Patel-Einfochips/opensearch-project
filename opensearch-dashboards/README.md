@@ -19,7 +19,7 @@ This guide explains how to install OpenSearch Dashboards using Helm after your O
 ## Prerequisites
 - A running Kubernetes cluster
 - Helm >= 2.17.0 ([Helm installation guide](https://helm.sh/docs/intro/install/))
-- <a href="../opensearch-dashboards/README.md" >OpenSearch cluster installed via Helm</a>
+- <a href="../opensearch/README.md" >OpenSearch cluster installed via Helm</a>
 - Access to the OpenSearch cluster (e.g., using curl to verify it’s running)
 
 ## Verify OpenSearch Cluster
