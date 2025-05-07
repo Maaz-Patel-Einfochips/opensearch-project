@@ -1,0 +1,68 @@
+opensearchHosts: "https://opensearch-cluster-master:9200"
+
+replicaCount: 1
+
+image:
+  repository: "opensearchproject/opensearch-dashboards"
+  tag: ""
+  pullPolicy: "IfNotPresent"
+
+startupProbe:
+  tcpSocket:
+    port: 5601
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 20
+  successThreshold: 1
+  initialDelaySeconds: 10
+
+livenessProbe:
+  tcpSocket:
+    port: 5601
+  periodSeconds: 20
+  timeoutSeconds: 5
+  failureThreshold: 10
+  successThreshold: 1
+  initialDelaySeconds: 10
+
+readinessProbe:
+  tcpSocket:
+    port: 5601
+  periodSeconds: 20
+  timeoutSeconds: 5
+  failureThreshold: 10
+  successThreshold: 1
+  initialDelaySeconds: 10
+
+config:
+  opensearch_dashboards.yml: |
+    server.name: dashboards
+    server.host: "0.0.0.0"
+    opensearch.hosts: ["https://opensearch-cluster-master.demo-test.svc.cluster.local:9200"]
+    opensearch.ssl.verificationMode: none
+    opensearch.username: "admin"
+    opensearch.password: "<custom-admin-password>"
+    assistant.chat.enabled: true
+    observability.query_assist.enabled: true
+
+service:
+  type: LoadBalancer
+  port: 5601
+  metricsPort: 9601
+  httpPortName: http
+  metricsPortName: metrics
+
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  runAsNonRoot: true
+  runAsUser: 1000
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "512M"
+  limits:
+    cpu: "100m"
+    memory: "512M"
